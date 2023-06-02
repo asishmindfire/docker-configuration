@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    container_name: rabbitmq_server
+    image: rabbitmq:3-management
+    restart: on-failure
+    ports:
+      # AMQP protocol port
+      - 5672:5672
+      # HTTP management UI
+      - 15672:15672
+    volumes:
+      - ./rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - mongo-compass_mongo-network
+
+volumes:
+  rabbitmq_data: {}
+
+
+networks:
+  mongo-compass_mongo-network:
+    external: true
